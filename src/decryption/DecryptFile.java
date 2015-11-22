@@ -9,12 +9,12 @@ import utility.Utils;
 public class DecryptFile {
 
 	static final int mode=Cipher.DECRYPT_MODE;
-	String key;
+	byte[] key;
 	int numberOfBits;
 	String algorithm;
 	String transformation;
 	
-	public DecryptFile(String key, int numberOfBits, String algorithm,String transformation) {
+	public DecryptFile(byte[] key, int numberOfBits, String algorithm,String transformation) {
 		super();
 		this.key = key;
 		this.numberOfBits = numberOfBits;

@@ -10,12 +10,12 @@ import utility.Utils;
 public class EncrptFile {
 
 	static final int mode=Cipher.ENCRYPT_MODE;
-	String key;
+	byte[] key;
 	int numberOfBits;
 	String algorithm;
 	String transformation;
 	
-	public EncrptFile(String key, int numberOfBits, String algorithm,String transformation) {
+	public EncrptFile(byte[] key, int numberOfBits, String algorithm,String transformation) {
 		super();
 		this.key = key;
 		this.numberOfBits = numberOfBits;

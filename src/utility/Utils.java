@@ -3,15 +3,20 @@ package utility;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
 public class Utils {
-
+	
+	
 	// This is the method for encrypting the file.
 	public void encryptFile(String transformation,int cipherMode,File inputFile,File outputFile,byte[] key) throws Exception{
 		
@@ -55,5 +60,41 @@ public class Utils {
 		}
 	   return bytes;   
 	}
+
+	
+	public byte[] keyEncryptAndDecrypt(byte[] input,int  mode1,byte[] key){
+		int mode;
+		String transformation="AES";
+		byte[] encryptedKey=null;
+			
+		if(mode1 ==0 ){
+		mode=Cipher.ENCRYPT_MODE;
+		}else{
+		mode=Cipher.DECRYPT_MODE;		
+		}
+		
+		try {
+			Key secretKey = new SecretKeySpec(key, transformation);
+			Cipher cipher = Cipher.getInstance(transformation);
+			cipher.init(mode, secretKey);
+			encryptedKey = cipher.doFinal(input);
+			 
+		} catch (InvalidKeyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchPaddingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (IllegalBlockSizeException | BadPaddingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return encryptedKey;
+		
+	}
+	
 	
 }

@@ -44,6 +44,7 @@ public class UIController {
 	
 	String username,password;
 	String jusFileName;
+	String fileName;
 	boolean upload;
 	boolean download;
 	boolean auth;
@@ -116,6 +117,7 @@ public class UIController {
                 System.out.println("getSelectedFile() : "+ chooser.getSelectedFile());
                 chosenFile=chooser.getSelectedFile().toString();
                 String cut[] = chosenFile.split("\\\\");
+                fileName= chooser.getSelectedFile().getName();
                 int len= cut.length;
                 jusFileName = cut[len-1];
                 ui.textField.setText(cut[len-1]);
@@ -171,8 +173,8 @@ public class UIController {
 								//input file to be encrypted
 								File inputFile = new File(filepath);
 								//output location for the encrypted file
-								File encryptedFile = new File("C:/Users/snigdha/Desktop/New folder/Encrypt-DropBox-latest/temp/ENC_"+jusFileName);
-								efile ="C:/Users/snigdha/Desktop/New folder/Encrypt-DropBox-latest/temp/ENC_"+jusFileName;
+								File encryptedFile = new File("temp/ENC_"+ fileName);
+								efile ="temp/ENC_"+fileName;
 								System.out.println("Enc file path :"+efile);
 								//Call the Encrypt function
 								 try {

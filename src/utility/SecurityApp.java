@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 public class SecurityApp {
 	Connection conn = null;
-	Statement stmt = null;
+	public static Statement stmt = null;
 	ResultSet rs=null;
 	public SecurityApp(){
 /*
@@ -62,6 +62,7 @@ public void insert(String userName, String fileName , byte[] encFileKey, byte[] 
 	
 	p.setString(1, userName);
 	p.setString(2, fileName);
+	System.out.println("enc value is:" + Arrays.toString(encFileKey));
 	p.setBytes(3, encFileKey);
 	p.setBytes(4, encHashKey);
 	p.setString(5, hashValue);
@@ -104,7 +105,6 @@ return obj1;
 
 	
 }
-
 
 
 }//end class

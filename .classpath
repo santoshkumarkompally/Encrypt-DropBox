@@ -3,5 +3,9 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="src/mysql-connector-java-5.1.37-bin.jar"/>
+	<classpathentry kind="lib" path="/Encrypt-DropBox/dropbox-client-1.5.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/snigdha/Downloads/dropbox-java-sdk-1.8.2 (1)/dropbox-java-sdk-1.8.2/lib/dropbox-core-sdk-1.8.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/snigdha/Downloads/dropbox-java-sdk-1.8.2 (1)/dropbox-java-sdk-1.8.2/lib/jackson-core-2.6.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

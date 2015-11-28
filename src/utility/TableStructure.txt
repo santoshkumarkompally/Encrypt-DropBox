@@ -8,3 +8,6 @@
 | hashvalue  | varchar(1000) | YES  |     | NULL    |       |
 | doublehash | varchar(1000) | YES  |     | NULL    |       |
 +------------+---------------+------+-----+---------+-------+
+
+
+ create table keystore(user varchar(50), filename varchar(200), encfilekey varchar(1000),enchashkey varchar(1000),hashvalue varchar(1000),doublehash varchar(1000),primary key(user,filename));

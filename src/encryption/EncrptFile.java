@@ -45,9 +45,10 @@ public class EncrptFile {
 		// adding values to the database
 		 byte[] encFilePassword= newObj.generateMasterKey_EncryptAndDecrypt(password, 0, fileEncKey);
 		 byte[] encHashPassword= newObj.generateMasterKey_EncryptAndDecrypt(password, 0, hashKey);
+		 String hashPassword= newObj.stringHash(password);
 		// instead of password hash in the last column file hash is stored.
 		// This has to be changed for hashing password. Function is not yet implemented. 
-		 dbConn.insert(userName,outputFile.getName(),encFilePassword, encHashPassword, hashValue, hashValue);
+		 dbConn.insert(userName,outputFile.getName(),encFilePassword, encHashPassword, hashValue, hashPassword);
 		// do the file encryption
 		newObj.encryptFile(transformation,mode, inputFile, outputFile, fileEncKey);
 	

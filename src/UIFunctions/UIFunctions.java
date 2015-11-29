@@ -97,7 +97,7 @@ public static boolean auth = false;
 	
 	
 	public static boolean downloadFromDropbox(String fileName) throws DbxException,IOException {
-		String dfile ="C:/Users/snigdha/Desktop/New folder/Encrypt-DropBox-latest/temp/";
+		String dfile ="temp/";
 		FileOutputStream outputStream = new FileOutputStream(dfile+fileName);
 		try {
 			DbxEntry.File downloadedFile = client.getFile("/" + fileName,null,outputStream);

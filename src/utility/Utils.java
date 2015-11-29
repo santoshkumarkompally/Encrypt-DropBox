@@ -3,9 +3,11 @@ package utility;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.Key;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -202,6 +204,34 @@ public class Utils {
 		return hashValue;
 		
 	}
+	
+	public String stringHash(String input)
+        {
+            MessageDigest md;
+            byte[] buffer;
+            String hexStr = "";
+			try {
+				md = MessageDigest.getInstance("SHA1");
+			
+            md.reset();
+            
+				buffer = input.getBytes("UTF-8");
+				md.update(buffer);
+	            byte[] digest = md.digest();
+	            for (int i = 0; i < digest.length; i++) {
+	                hexStr +=  Integer.toString( ( digest[i] & 0xff ) + 0x100, 16).substring( 1 );
+	            }
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NoSuchAlgorithmException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+            
+            return hexStr;
+        }
+	
 	
 	
 }

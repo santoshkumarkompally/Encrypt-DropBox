@@ -31,6 +31,7 @@ import decryption.DecryptFile;
 import encryption.EncrptFile;
 import utility.DbReturns;
 import utility.SecurityApp;
+import utility.Utils;
 
 
 public class UIController {
@@ -119,8 +120,9 @@ public class UIController {
                 String cut[] = chosenFile.split("\\\\");
                 fileName= chooser.getSelectedFile().getName();
                 int len= cut.length;
-                jusFileName = cut[len-1];
-                ui.textField.setText(cut[len-1]);
+                //jusFileName = cut[len-1];
+                jusFileName = fileName;
+                ui.textField.setText(fileName);
             } else {
                 System.out.println("No Selection ");
             }
@@ -149,7 +151,7 @@ public class UIController {
 				 
 				//Check and Upload the file 
 				 try {
-					String em="ENC_"+jusFileName;
+					String em="ENC_"+fileName;
 					DbReturns obj2 =new DbReturns();
 					SecurityApp sa = new SecurityApp();
 					obj2=sa.getData(username, em);
@@ -268,15 +270,45 @@ public class UIController {
 				
 				 if(dnldfilematch.substring(0,4).equals("/ENC"))
 				 {
+					 
+				String dnldfile=dnldfilematch.substring(1);	 
+					 
 				//decrypt the file
-				String dfile= "C:/Users/snigdha/Desktop/New folder/Encrypt-DropBox-latest/temp/";
+				String dfile= "temp/";
+				//check for filename + username+ hash of pwd
+				
+				// connection to database to get the required values.
+				SecurityApp s=new SecurityApp();
+				
+				DbReturns obj= s.getData(username,dnldfile);
+				System.out.println(dfile);
+				String passHash = obj.getHhkey();
+				boolean passwordCorrect= false;
+				String hashCalulated = new Utils().stringHash(password);
+				
+				if(passHash.equals(hashCalulated)){
+					
+					
+					passwordCorrect=true;
+					
+				}else{
+					
+					passwordCorrect=false;
+					
+				}
+				
+				
+				System.out.println("password check is:" + passwordCorrect);
+				
+				
 				DecryptFile d= new DecryptFile(128,"AES","AES",username,password);
-				String dnldfile=dnldfilematch.substring(1);
+				
 				System.out.println("Downloaded file :"+dnldfile);
 				File encryptedFile = new File(dfile+dnldfile);
 				String actualFileName = dnldfile.substring(4);
 				File decFile=new File(dfile+actualFileName);
 				try {
+					
 					d.Decrypt(encryptedFile, decFile);
 					
 				} catch (Exception e1) {
@@ -293,7 +325,7 @@ public class UIController {
 				Desktop desktop = Desktop.getDesktop();
 		        File dirToOpen = null;
 		        try {
-		            dirToOpen = new File("C:\\Users\\snigdha\\Desktop\\New folder\\Encrypt-DropBox-latest\\temp");
+		            dirToOpen = new File("temp/");
 		            try {
 						desktop.open(dirToOpen);
 					} catch (IOException e1) {
@@ -312,12 +344,6 @@ public class UIController {
 				 
 				 
 			}
-			
-		
-	    
-	    
-		
-			
 			
 			
 		}

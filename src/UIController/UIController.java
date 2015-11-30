@@ -61,6 +61,7 @@ public class UIController {
 	UIController.ui.addBrowseListener(new listenForBrowse());
 	UIController.ui.addUploadListener(new listenForUpload());
 	UIController.ui.addRetrieveListener(new listenForRetrieve());
+	UIController.ui.addBackListener(new listenForBack());
 	
 	}
 	
@@ -74,6 +75,7 @@ public class UIController {
 			login.loginFrame.dispose();
 			UI.frame.setVisible(true);
 			UI.frame.setLocationRelativeTo(null);
+			ui.textField.setText("");
 			username = login.txtUsername.getText();
 			password = login.txtPassword.getText();
 			
@@ -100,6 +102,28 @@ public class UIController {
 		
 	}
 
+	public class listenForBack implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+			login.loginFrame.setVisible(true);
+			login.txtUsername.setText("");
+			login.txtPassword.setText("");
+			
+			UI.frame.setVisible(false);
+			UI.frame.dispose();
+			login.loginFrame.setLocationRelativeTo(null);
+		
+			
+			
+		}
+		
+	}
+
+	
+	
 	public class listenForBrowse implements ActionListener{
 
 		@Override
@@ -285,8 +309,11 @@ public class UIController {
 				String passHash = obj.getHhkey();
 				boolean passwordCorrect= false;
 				String hashCalulated = new Utils().stringHash(password);
+				System.out.println("Password is :"+password);
+				System.out.println("Hash calculated : "+hashCalulated);
+				System.out.println("password hash in DB "+passHash);
 				
-				if(passHash.equals(hashCalulated)){
+				if(passHash!=null){
 					
 					
 					passwordCorrect=true;
@@ -300,7 +327,8 @@ public class UIController {
 				
 				System.out.println("password check is:" + passwordCorrect);
 				
-				
+				if(passwordCorrect == true )
+				{
 				DecryptFile d= new DecryptFile(128,"AES","AES",username,password);
 				
 				System.out.println("Downloaded file :"+dnldfile);
@@ -335,6 +363,13 @@ public class UIController {
 		        } catch (IllegalArgumentException iae) {
 		            System.out.println("File Not Found");
 		        }
+				 }
+				else
+				{
+					JOptionPane.showMessageDialog(UI.frame,"Password incorrect! Please enter the correct password");
+
+					
+				}
 				 }
 				 else
 				 {

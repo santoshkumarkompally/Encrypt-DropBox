@@ -39,7 +39,7 @@ public class UI extends JFrame {
 	public JTextField textField;
 	public String chosenFile;
 	public String filepath;
-	public JButton btnBrowse,btnUpload,btnRetrieve;
+	public JButton btnBrowse,btnUpload,btnRetrieve,btnBack;
 	public JScrollPane txtscroll;
 
 	
@@ -98,7 +98,11 @@ public class UI extends JFrame {
 		contentPane.add(btnRetrieve);
 		
 		
-				 
+		btnBack = new JButton("Back");
+		btnBack.setBounds(408, 800,141,35);
+		btnBack.setFont(new Font("Cambria", Font.BOLD, 24));
+		contentPane.add(btnBack);	
+		
 		txtrListOfFiles = new JTextArea();
 		txtrListOfFiles.setText(" List of files :");
 		txtrListOfFiles.setAutoscrolls(true);
@@ -130,6 +134,13 @@ public class UI extends JFrame {
 	public void addRetrieveListener(ActionListener listenForRetrieve)
 	{
 		btnRetrieve.addActionListener(listenForRetrieve);
+	}
+
+
+
+	public void addBackListener(ActionListener listenForBack) {
+		// TODO Auto-generated method stub
+		 btnBack.addActionListener(listenForBack);
 	}
 	
 	
